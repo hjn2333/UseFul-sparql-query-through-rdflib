@@ -1,0 +1,131 @@
+@prefix ns1: <urn:absolute:uav#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:absolute:uav> a owl:Ontology .
+
+ns1:Destination a owl:InverseFunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:domain ns1:uav ;
+    rdfs:range ns1:station ;
+    owl:inverseOf ns1:isDestinationTo .
+
+ns1:Location_x a owl:DatatypeProperty ;
+    rdfs:domain ns1:uav_object ;
+    rdfs:range xsd:integer .
+
+ns1:Location_y a owl:DatatypeProperty ;
+    rdfs:domain ns1:uav_object ;
+    rdfs:range xsd:integer .
+
+ns1:Location_z a owl:DatatypeProperty ;
+    rdfs:domain ns1:uav_object ;
+    rdfs:range xsd:integer .
+
+ns1:Radius a owl:DatatypeProperty ;
+    rdfs:domain ns1:interference,
+        ns1:obstruct,
+        ns1:station ;
+    rdfs:range xsd:integer .
+
+ns1:Speed a owl:DatatypeProperty ;
+    rdfs:domain ns1:uav ;
+    rdfs:range xsd:integer .
+
+ns1:TransmissionRate a owl:DatatypeProperty ;
+    rdfs:domain ns1:station ;
+    rdfs:range xsd:integer .
+
+ns1:interference1 a owl:NamedIndividual,
+        ns1:interference ;
+    ns1:Location_x 10 ;
+    ns1:Location_y 12 ;
+    ns1:Location_z 0 ;
+    ns1:Radius 8 .
+
+ns1:interference2 a owl:NamedIndividual,
+        ns1:interference ;
+    ns1:Location_x 76 ;
+    ns1:Location_y 54 ;
+    ns1:Location_z 5 ;
+    ns1:Radius 12 .
+
+ns1:obstruct1 a owl:NamedIndividual,
+        ns1:obstruct ;
+    ns1:Location_x 10 ;
+    ns1:Location_y 10 ;
+    ns1:Location_z 10 ;
+    ns1:Radius 2 .
+
+ns1:obstruct2 a owl:NamedIndividual,
+        ns1:obstruct ;
+    ns1:Location_x 50 ;
+    ns1:Location_y 50 ;
+    ns1:Location_z 50 ;
+    ns1:Radius 8 .
+
+ns1:station1 a owl:NamedIndividual,
+        ns1:station ;
+    ns1:Location_x 10 ;
+    ns1:Location_y 5 ;
+    ns1:Location_z 0 ;
+    ns1:Radius 15 ;
+    ns1:TransmissionRate 48 .
+
+ns1:station2 a owl:NamedIndividual,
+        ns1:station ;
+    ns1:Location_x 10 ;
+    ns1:Location_y 80 ;
+    ns1:Location_z 0 ;
+    ns1:Radius 8 ;
+    ns1:TransmissionRate 16 ;
+    ns1:isDestinationTo ns1:uav1 .
+
+ns1:station4 a owl:NamedIndividual,
+        ns1:station ;
+    ns1:Location_x 80 ;
+    ns1:Location_y 10 ;
+    ns1:Location_z 0 ;
+    ns1:Radius 12 ;
+    ns1:TransmissionRate 18 .
+
+ns1:isDestinationTo a owl:InverseFunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:domain ns1:station ;
+    rdfs:range ns1:uav .
+
+ns1:station3 a owl:NamedIndividual,
+        ns1:station ;
+    ns1:Location_x 74 ;
+    ns1:Location_y 80 ;
+    ns1:Location_z 0 ;
+    ns1:Radius 7 ;
+    ns1:TransmissionRate 24 .
+
+ns1:uav1 a owl:NamedIndividual,
+        ns1:uav ;
+    ns1:Destination ns1:station3 ;
+    ns1:Location_x 20 ;
+    ns1:Location_y 20 ;
+    ns1:Location_z 0 ;
+    ns1:Speed 9 .
+
+ns1:interference a owl:Class ;
+    rdfs:subClassOf ns1:uav_object .
+
+ns1:obstruct a owl:Class ;
+    rdfs:subClassOf ns1:uav_object .
+
+ns1:uav a owl:Class ;
+    rdfs:subClassOf ns1:uav_object .
+
+ns1:uav_object a owl:Class .
+
+ns1:station a owl:Class ;
+    rdfs:subClassOf ns1:uav_object .
+
+[] a owl:AllDisjointClasses ;
+    owl:members ( ns1:interference ns1:obstruct ns1:station ns1:uav ) .
+
